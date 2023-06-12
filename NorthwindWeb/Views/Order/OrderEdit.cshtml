@@ -1,0 +1,98 @@
+﻿@model NorthwindWeb.Models.OrderDto
+
+<style>
+    .product-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+        .product-row input[type="text"] {
+            margin-right: 10px;
+        }
+
+        .product-row .remove-product {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<form asp-action="OrderEdit">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Update Order</h1>
+
+        <hr />
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" class="form-control" asp-for="OrderId" />
+            
+            <div class="col-2">
+                <label asp-for="EmployeeId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <select class="form-control" asp-for="EmployeeId">
+                    @foreach (var employee in (List<EmployeeDto>)ViewData["listEmployee"])
+                    {
+                        <option value="@employee.EmployeeId">@employee.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="CustomerId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input class="form-control" asp-for="CustomerId" type="text" readonly />
+            </div>
+            <div class="col-2">
+                <label asp-for="OrderDate" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="OrderDate" class="form-control" type="date" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="ListOfProduct" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                @for (int i = 0; i < Model.ListOfProduct.Count; i++)
+                {
+                    <input type="hidden" class="form-control" asp-for="@Model.ListOfProduct[i].ProductId" value="@Model.ListOfProduct[i].ProductId" />
+                    <input type="hidden" class="form-control" asp-for="@Model.ListOfProduct[i].Quantity" value="@Model.ListOfProduct[i].Quantity" />
+                    <input type="hidden" class="form-control" asp-for="@Model.ListOfProduct[i].UnitPrice" value="@Model.ListOfProduct[i].UnitPrice" />
+                }
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model.ListOfProduct)
+                        {
+                            <tr>
+                                <td>@product.ProductId</td>
+                                <td>@product.UnitPrice</td>
+                                <td>@product.Quantity</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-5 offset-2">
+
+                <a asp-action="OrderIndex" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Edit" class="btn btn-success form-control" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

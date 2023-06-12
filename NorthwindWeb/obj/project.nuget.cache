@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "5V3Y1OeQwOR9wJZxSE/EbABHNz0ekEHt8gZaGRz3OFoADitvMKvK9EFZxEDZzlNti8ixJNj91+zSooqNKomG1A==",
+  "success": true,
+  "projectFilePath": "/Users/admin/Documents/PRN231/Assignment02Solution/NorthwindWeb/NorthwindWeb.csproj",
+  "expectedPackageFiles": [
+    "/Users/admin/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
